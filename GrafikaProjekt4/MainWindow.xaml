@@ -1,0 +1,117 @@
+﻿<Window x:Class="GrafikaProjekt4.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GrafikaProjekt4"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="800">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="600"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+
+        <Canvas HorizontalAlignment="Center"
+                Name="MainCanvas"
+                Background="LightGray"
+                Height="400"
+                Width="400">
+        <Image Name="MainImage" 
+                   Source="{Binding bitmap.writeableBitmap}"
+                   Width="400"
+                   Height="400"/>
+        </Canvas>
+
+        <StackPanel Grid.Column="1">
+            <TextBlock Text="Shading:"
+                       Margin="10 10 0 0"/>
+            <RadioButton x:Name="noShading"
+                         GroupName="light" Content="None"
+                         IsChecked="{Binding noShading, Mode=TwoWay}"/>
+            <RadioButton x:Name="constant"
+                         GroupName="light" Content="Constant shading"
+                         IsChecked="{Binding constant, Mode=TwoWay}"/>
+            <RadioButton x:Name="gouraud"
+                         GroupName="light" Content="Gouraud shading"
+                         IsChecked="{Binding gouraud, Mode=TwoWay}"/>
+            <RadioButton x:Name="phong"
+                         GroupName="light" Content="Phong shading"
+                         IsChecked="{Binding phong, Mode=TwoWay}"/>
+            <TextBlock Text="Camera:"
+                       Margin="10 10 0 0"/>
+            <RadioButton x:Name="regularCam"
+                         GroupName="camera" Content="Regular"
+                         IsChecked="{Binding regularCam, Mode=TwoWay}"/>
+            <RadioButton x:Name="followCam"
+                         GroupName="camera" Content="Following a cube"
+                         IsChecked="{Binding followCam, Mode=TwoWay}"/>
+            <RadioButton x:Name="attachCam"
+                         GroupName="camera" Content="Attached to a cube"
+                         IsChecked="{Binding attachCam, Mode=TwoWay}"/>
+
+            <CheckBox x:Name="showLine"
+                      Content="Show lines" 
+                      IsChecked="{Binding showLine, Mode=TwoWay}"
+                      Margin="0 10 0 0"/>
+
+            <CheckBox x:Name="fill"
+                      Content="Fill" 
+                      IsChecked="{Binding fill, Mode=TwoWay}"
+                      Margin="0 10 0 0"/>
+
+            <CheckBox x:Name="vertices"
+                      Content="Vertices" 
+                      IsChecked="{Binding vert, Mode=TwoWay}"
+                      Margin="0 10 0 0"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                <TextBlock Text="ka:" HorizontalAlignment="Left" Margin="10 0 0 0"
+                        Foreground="Black"/>
+                <TextBlock Text="{Binding ElementName=kaSlider,
+                        Path=Value, Mode=OneWay, StringFormat=N2}"
+                               HorizontalAlignment="Left" Margin="10 0 0 0"
+                        Foreground="Black" />
+            </StackPanel>
+            <Slider Minimum="0" Maximum="1" Name="kaSlider" Value="{Binding ka, Mode=TwoWay,
+                    UpdateSourceTrigger=LostFocus}"
+                    Width="150"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                <TextBlock Text="kd:" HorizontalAlignment="Left" Margin="10 0 0 0"
+                        Foreground="Black"/>
+                <TextBlock Text="{Binding ElementName=kdSlider,
+                        Path=Value, Mode=OneWay, StringFormat=N2}"
+                               HorizontalAlignment="Left" Margin="10 0 0 0"
+                        Foreground="Black" />
+            </StackPanel>
+            <Slider Minimum="0" Maximum="1" Name="kdSlider" Value="{Binding kd, Mode=TwoWay,
+                    UpdateSourceTrigger=LostFocus}"
+                    Width="150"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                <TextBlock Text="ks:" HorizontalAlignment="Left" Margin="10 0 0 0"
+                        Foreground="Black"/>
+                <TextBlock Text="{Binding ElementName=ksSlider,
+                        Path=Value, Mode=OneWay, StringFormat=N2}"
+                               HorizontalAlignment="Left" Margin="10 0 0 0"
+                        Foreground="Black" />
+            </StackPanel>
+            <Slider Minimum="0" Maximum="1" Name="ksSlider" Value="{Binding ks, Mode=TwoWay,
+                    UpdateSourceTrigger=LostFocus}"
+                    Width="150"/>
+
+            <CheckBox x:Name="animation"
+                      Content="Animation" 
+                      IsChecked="{Binding animation, Mode=TwoWay}"
+                      Margin="0 10 0 0"/>
+
+            <Button Height="20" Width="100"
+                    Margin="0 10 0 0">
+                Apply
+            </Button>
+        </StackPanel>
+
+    </Grid>
+</Window>
